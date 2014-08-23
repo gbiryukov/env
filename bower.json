@@ -1,0 +1,27 @@
+{
+  "name": "env",
+  "version": "1.0.0",
+  "authors": [
+    "George Biryukov <george@biryukov.ws>"
+  ],
+  "description": "get your server environment variables into js amd modules",
+  "main": "src/env.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "env",
+    "amd",
+    "environment",
+    "requrejs"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gbiryukov/env",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
