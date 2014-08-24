@@ -1,0 +1,7 @@
+body, html, .view{
+	height: 100%;
+}
+
+body{
+	padding-top: 70px;
+}

@@ -44,7 +44,12 @@
 				document.attachEvent('onenvReady', runCallback);
 			}
 		},
-		_ready: function () {
+		_extendEnv: function(obj) {
+			for (var key in obj){
+				env[key] = obj[key];
+			}
+		},
+		ready: function () {
 			// The custom event that will be created
 			var event;
 
@@ -66,11 +71,14 @@
 
 			this._isReady = true;
 		},
-		set: function (vars) {
-			env = vars;
-			this._ready();
+		set: function (key, value) {
+			if (typeof(key) === 'object') {
+				this._extendEnv(key);
+			} else {
+				env[key] = value;
+			}
 		},
-		getVar: function (key) {
+		get: function (key) {
 			if (typeof(env[key]) !== 'undefined') {
 				return env[key];
 			} else {

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Env demo</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script data-main="js/main" src="js/lib/require.js"></script>
+	<script type="text/javascript">
+        require(['main'], function () {
+            require(['env'], function (Env) {
+            	Env.set({
+                    static: 'http://static.production.com',
+                    myAjaxService: 'ajax/service?id=1'
+                });
+
+            	setTimeout(function() {
+            		Env.ready();
+            	}, 3000);
+            })
+        });
+    </script>
+</head>
+<body>
+	<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">
+					Env demo
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9">
+				<h1>Assigned variables</h1>
+				<p>Page will be loaded after: <span class="countdown">3</span></p>
+				<ul class="vars">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--<script src="js/dist.js"></script>-->
+</body>
+</html>
