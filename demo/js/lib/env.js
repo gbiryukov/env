@@ -1,8 +1,8 @@
-/*! 
-* env - v1.0.0 - 2014-08-24
+/*!
+* env - v1.0.0 - 2014-08-25
 * https://github.com/gbiryukov/env
 * Copyright (c) 2014 George Biryukov
-* Licensed MIT 
+* Licensed MIT
 */
 
 (function(exports, envModule) {
@@ -28,20 +28,9 @@
 
 	return {
 		_isReady: false,
+		_callbacks:[],
 		_bind: function(callback){
-			var self = this;
-
-			function runCallback(){
-				if (typeof(callback) === 'function') {
-					callback.call(self);
-				}
-			}
-
-			if (document.addEventListener) {
-				document.addEventListener('envReady', runCallback, false);
-			} else {
-				document.attachEvent('onenvReady', runCallback);
-			}
+			this._callbacks.push(callback);
 		},
 		_extendEnv: function(obj) {
 			for (var key in obj){
@@ -49,23 +38,8 @@
 			}
 		},
 		ready: function () {
-			// The custom event that will be created
-			var event;
-
-			if (document.createEvent) {
-				event = document.createEvent('HTMLEvents');
-				event.initEvent('envReady', true, true);
-			} else {
-				event = document.createEventObject();
-				event.eventType = 'envReady';
-			}
-
-			event.eventName = 'envReady';
-
-			if (document.createEvent) {
-				document.dispatchEvent(event);
-			} else {
-				document.fireEvent('on' + event.eventType, event);
+			for (var i in this._callbacks){
+				this._callbacks[i].call(this);
 			}
 
 			this._isReady = true;
@@ -85,12 +59,14 @@
 			}
 		},
 		onReady: function (callback) {
-			// if event handler attached after env initialization
-			// invoke it immediately
-			if (this._isReady && typeof(callback) === 'function') {
-				callback.call(this);
-			} else {
-				this._bind(callback);
+			if (typeof(callback) === 'function') {
+				if (this._isReady) {
+					// if event handler attached after env initialization
+					// invoke it immediately
+					callback.call(this);
+				} else {
+					this._bind(callback);
+				}
 			}
 		}
 	};
