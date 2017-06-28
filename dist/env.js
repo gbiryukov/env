@@ -1,7 +1,7 @@
 /*! 
-* env - v1.0.0 - 2014-08-25
+* env - v1.0.0 - 2017-06-28
 * https://github.com/gbiryukov/env
-* Copyright (c) 2014 George Biryukov
+* Copyright (c) 2017 George Biryukov
 * Licensed MIT 
 */
 
@@ -24,29 +24,47 @@
 
 	'use strict';
 
-	var env = {};
+	var env;
+	var isReady;
+	var callbacks;
+	var resolveStatus;
+	var status;
 
-	return {
-		_isReady: false,
-		_callbacks:[],
-		_bind: function(callback){
-			this._callbacks.push(callback);
-		},
-		_extendEnv: function(obj) {
-			for (var key in obj){
+	function reset() {
+		env = {};
+		isReady = false;
+		callbacks = [];
+		status = new Promise(function(resolve) {
+			resolveStatus = resolve;
+		});
+	}
+
+	function addListener(callback){
+		callbacks.push(callback);
+	}
+
+	function extendEnv(obj) {
+		for (var key in obj){
+			if (obj.hasOwnProperty(key)) {
 				env[key] = obj[key];
 			}
-		},
+		}
+	}
+
+	reset();
+
+	return {
 		ready: function () {
-			for (var i in this._callbacks){
-				this._callbacks[i].call(this);
+			for (var i in callbacks){
+				callbacks[i].call(this);
 			}
 
-			this._isReady = true;
+			isReady = true;
+			resolveStatus();
 		},
 		set: function (key, value) {
 			if (typeof(key) === 'object') {
-				this._extendEnv(key);
+				extendEnv(key);
 			} else {
 				env[key] = value;
 			}
@@ -60,14 +78,22 @@
 		},
 		onReady: function (callback) {
 			if (typeof(callback) === 'function') {
-				if (this._isReady) {
-					// if event handler attached after env initialization
-					// invoke it immediately
+				if (isReady) {
+					/**
+					 * if event handler attached after env initialization
+					 * invoke it immediately
+					 */
 					callback.call(this);
 				} else {
-					this._bind(callback);
+					addListener(callback);
 				}
 			}
-		}
+
+			return status;
+		},
+		isReady: function() {
+			return isReady;
+		},
+		reset: reset
 	};
 }));
