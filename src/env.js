@@ -92,6 +92,9 @@
 
 			return status;
 		},
+		isReady: function() {
+			return isReady;
+		},
 		reset: reset
 	};
 }));

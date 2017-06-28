@@ -62,4 +62,10 @@ describe('Env', () => {
 
 		Env.ready();
 	});
+
+	it('Should report correct status by `isReady` call', () => {
+		expect(Env.isReady()).toEqual(false);
+		Env.ready();
+		expect(Env.isReady()).toEqual(true);
+	});
 });
