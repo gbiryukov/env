@@ -28,11 +28,16 @@
 	var env;
 	var isReady;
 	var callbacks;
+	var resolveStatus;
+	var status;
 
 	function reset() {
 		env = {};
 		isReady = false;
 		callbacks = [];
+		status = new Promise(function(resolve) {
+			resolveStatus = resolve;
+		});
 	}
 
 	function addListener(callback){
@@ -56,6 +61,7 @@
 			}
 
 			isReady = true;
+			resolveStatus();
 		},
 		set: function (key, value) {
 			if (typeof(key) === 'object') {
@@ -81,6 +87,8 @@
 					addListener(callback);
 				}
 			}
+
+			return status;
 		},
 		reset: reset
 	};

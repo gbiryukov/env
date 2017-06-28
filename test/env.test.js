@@ -52,4 +52,14 @@ describe('Env', () => {
 			expect(Env.get('foo')).toEqual(1);
 		});
 	});
+
+	it('Should resolve `onReady` return value after `ready` call', () => {
+		Env.set('foo', 1);
+
+		Env.onReady(() => {}).then(() => {
+			expect(Env.get('foo')).toEqual(1);
+		});
+
+		Env.ready();
+	});
 });
