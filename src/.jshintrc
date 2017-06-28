@@ -12,5 +12,5 @@
   "browser": true,
   "dojo": true,
   "devel": false,
-  "predef": ["module", "exports"]
+  "predef": ["module", "exports", "Promise"]
 }

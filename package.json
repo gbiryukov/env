@@ -20,7 +20,8 @@
     "url": "https://github.com/gbiryukov/env"
   },
   "scripts": {
-    "test": "mocha test/**/*.js"
+    "test": "mocha test/**/*.js",
+    "build": "npm t && grunt"
   },
   "licenses": [
     {
@@ -29,6 +30,7 @@
   ],
   "devDependencies": {
     "expect": "^1.20.2",
+    "grunt": "^1.0.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-jshint": "~0.6.0",
