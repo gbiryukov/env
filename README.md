@@ -2,6 +2,10 @@
 
 Get your server environment variables into js amd modules.
 
+## Dependencies
+
+You need to include Promise polyfill in order to support IE.
+
 ## Documentation
 _(Coming soon)_
 
