@@ -42,4 +42,14 @@ describe('Env', () => {
 		});
 		Env.ready();
 	});
+
+	it('Should invoke ready listeners even if they attached after `ready` call', () => {
+		Env.set('foo', 1);
+
+		Env.ready();
+
+		Env.onReady(() => {
+			expect(Env.get('foo')).toEqual(1);
+		});
+	});
 });
