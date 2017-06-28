@@ -3,7 +3,7 @@ const Env = require('../src/env.js');
 
 describe('Env', () => {
 	beforeEach(() => {
-		Env.clear();
+		Env.reset();
 	})
 
 	it('Should assign variable by key into Env via `set` method', () => {
@@ -25,9 +25,9 @@ describe('Env', () => {
 		expect(Env.get('foo')).toEqual(false);
 	});
 
-	it('Should remove all vars by calling `clear` method', () => {
+	it('Should remove all vars by calling `reset` method', () => {
 		Env.set('foo', 1);
-		Env.clear();
+		Env.reset();
 		expect(Env.get('foo')).toEqual(false);
 	});
 
