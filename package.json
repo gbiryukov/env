@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "get your server environment variables into js amd modules",
   "keywords": [
-    "env", "amd", "environment", "requrejs"
+    "env",
+    "amd",
+    "environment",
+    "requrejs"
   ],
   "homepage": "https://github.com/gbiryukov/env",
   "bugs": "https://github.com/gbiryukov/env/issues",
@@ -16,20 +19,25 @@
     "type": "git",
     "url": "https://github.com/gbiryukov/env"
   },
+  "scripts": {
+    "test": "mocha test/**/*.js"
+  },
   "licenses": [
     {
       "type": "MIT"
     }
   ],
   "devDependencies": {
+    "expect": "^1.20.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-qunit": "~0.2.2",
-    "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-watch": "~0.5.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "time-grunt": "~0.1.0",
+    "jshint-stylish": "~0.1.3",
     "load-grunt-tasks": "~0.2.0",
-    "jshint-stylish": "~0.1.3"
+    "mocha": "^3.4.2",
+    "time-grunt": "~0.1.0"
   }
 }
