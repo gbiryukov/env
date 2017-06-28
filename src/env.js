@@ -69,6 +69,9 @@
 					this._bind(callback);
 				}
 			}
+		},
+		clear: function () {
+			env = {};
 		}
 	};
 }));
