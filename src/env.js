@@ -80,8 +80,10 @@
 		onReady: function (callback) {
 			if (typeof(callback) === 'function') {
 				if (isReady) {
-					// if event handler attached after env initialization
-					// invoke it immediately
+					/**
+					 * if event handler attached after env initialization
+					 * invoke it immediately
+					 */
 					callback.call(this);
 				} else {
 					addListener(callback);
