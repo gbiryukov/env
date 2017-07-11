@@ -1,5 +1,5 @@
 /*! 
-* env - v1.1.0 - 2017-07-11
+* env - v1.2.1 - 2017-07-11
 * https://github.com/gbiryukov/env
 * Copyright (c) 2017 George Biryukov
 * Licensed MIT 
