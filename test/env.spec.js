@@ -9,5 +9,6 @@ describe('Env spec', () => {
 		expect(Env.onReady).toBeA('function');
 		expect(Env.isReady).toBeA('function');
 		expect(Env.reset).toBeA('function');
+		expect(Env.getAsync).toBeA('function');
 	});
 });

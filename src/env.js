@@ -28,15 +28,18 @@
 	var env;
 	var isReady;
 	var callbacks;
-	var resolveStatus;
-	var status;
+	var readyState;
+	var resolveReadyState;
 
 	function reset() {
 		env = {};
 		isReady = false;
 		callbacks = [];
-		status = new Promise(function(resolve) {
-			resolveStatus = resolve;
+		readyState = new Promise(function(resolve) {
+			resolveReadyState = function() {
+				isReady = true;
+				resolve();
+			};
 		});
 	}
 
@@ -56,12 +59,11 @@
 
 	return {
 		ready: function () {
+			resolveReadyState();
+
 			for (var i in callbacks){
 				callbacks[i].call(this);
 			}
-
-			isReady = true;
-			resolveStatus();
 		},
 		set: function (key, value) {
 			if (typeof(key) === 'object') {
@@ -77,6 +79,13 @@
 				return false;
 			}
 		},
+		getAsync: function(key) {
+			var self = this;
+
+			return readyState.then(function() {
+				return self.get(key);
+			});
+		},
 		onReady: function (callback) {
 			if (typeof(callback) === 'function') {
 				if (isReady) {
@@ -90,7 +99,7 @@
 				}
 			}
 
-			return status;
+			return readyState;
 		},
 		isReady: function() {
 			return isReady;

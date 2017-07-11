@@ -68,4 +68,14 @@ describe('Env', () => {
 		Env.ready();
 		expect(Env.isReady()).toEqual(true);
 	});
+
+	it('Should be able to return value asynchronously', done => {
+		Env.set('foo', 1);
+		Env.getAsync('foo').then(value => {
+			expect(value).toEqual(1)
+			done();
+		});
+
+		Env.ready();
+	});
 });
