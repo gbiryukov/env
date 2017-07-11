@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gbiryukov/env.svg?branch=master)](https://travis-ci.org/gbiryukov/env)
+
 # env-amd
 
 Get your server environment variables into js amd modules.
