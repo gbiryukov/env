@@ -1,6 +1,6 @@
 {
   "name": "env-amd",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "get your server environment variables into js amd modules",
   "keywords": [
     "env",
