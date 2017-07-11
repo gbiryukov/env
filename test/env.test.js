@@ -31,7 +31,7 @@ describe('Env', () => {
 		expect(Env.get('foo')).toEqual(false);
 	});
 
-	it('Should call all callbacks after `ready` invoke', () => {
+	it('Should call all callbacks after `ready` invoke', done => {
 		Env.set('foo', 1);
 		Env.set('bar', 2);
 		Env.onReady(() => {
@@ -39,25 +39,28 @@ describe('Env', () => {
 		});
 		Env.onReady(() => {
 			expect(Env.get('bar')).toEqual(2);
+			done();
 		});
 		Env.ready();
 	});
 
-	it('Should invoke ready listeners even if they attached after `ready` call', () => {
+	it('Should invoke ready listeners even if they attached after `ready` call', done => {
 		Env.set('foo', 1);
 
 		Env.ready();
 
 		Env.onReady(() => {
 			expect(Env.get('foo')).toEqual(1);
+			done();
 		});
 	});
 
-	it('Should resolve `onReady` return value after `ready` call', () => {
+	it('Should resolve `onReady` return value after `ready` call', done => {
 		Env.set('foo', 1);
 
 		Env.onReady(() => {}).then(() => {
 			expect(Env.get('foo')).toEqual(1);
+			done();
 		});
 
 		Env.ready();
